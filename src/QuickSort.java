@@ -1,33 +1,37 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class QuickSort {
-    public static void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pi = partition(arr, low, high);
+    public static void quickSort(int[] array, int low, int high) {
+        if (array.length == 0)
+            return;
 
+        if (low >= high)
+            return;
 
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
-        }
-    }
+        int middle = low + (high - low) / 2;
+        int opora = array[middle];
 
-    private static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = (low - 1);
-        for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {
+        int i = low, j = high;
+        while (i <= j) {
+            while (array[i] < opora) {
                 i++;
+            }
 
+            while (array[j] > opora) {
+                j--;
+            }
 
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+            if (i <= j) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
             }
         }
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
-        return i + 1;
+
+        if (low < j)
+            quickSort(array, low, j);
+
+        if (high > i)
+            quickSort(array, i, high);
     }
 }
