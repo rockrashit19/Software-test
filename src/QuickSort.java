@@ -2,26 +2,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuickSort {
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
 
-    public static List<Integer> sort(List<Integer> arr) {
-        if (arr.size() <= 1) return arr;
 
-        int pivot = arr.get(arr.size() - 1);
-        List<Integer> left = new ArrayList<>();
-        List<Integer> middle = new ArrayList<>();
-        List<Integer> right = new ArrayList<>();
-
-        for (int x : arr) {
-            if (x < pivot) left.add(x);
-            else if (x == pivot) middle.add(x);
-            else right.add(x);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
         }
+    }
 
-        System.out.printf("Pivot: %d, Left: %s, Right: %s%n", pivot, left, right);
+    private static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
 
-        List<Integer> sorted = new ArrayList<>(sort(left));
-        sorted.addAll(middle);
-        sorted.addAll(sort(right));
-        return sorted;
+
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        return i + 1;
     }
 }
