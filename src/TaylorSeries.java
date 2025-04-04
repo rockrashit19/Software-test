@@ -15,11 +15,5 @@ public class TaylorSeries {
         }
         return sum;
     }
-
-    public static void main(String[] args){
-        double x = 1.0;
-        int n = 11;
-        System.out.println(calculateCosSeries(x, n));
-    }
 }
 
